@@ -1,4 +1,4 @@
-package com.learning.java8.example.app.lambda.listas;
+package com.learning.java8.example.app.lambda.collections;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
