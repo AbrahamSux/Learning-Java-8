@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -42,6 +41,11 @@ public class ForEachCollection {
 
         listaOperaciones.forEach(operacion -> LOGGER.info("Operación : {}", operacion.toString()));
     }
+
+    public void llenarLista() {
+        listaOperaciones = Constants.listaOperaciones;
+    }
+
 
     public List<OperacionDTO> usingForEach(List<OperacionDTO> list) {
         List<OperacionDTO> operacions = new ArrayList<>();
@@ -81,33 +85,6 @@ public class ForEachCollection {
         });
 
         return operacions;
-    }
-
-
-
-    public void llenarLista() {
-        listaOperaciones = Arrays.asList(
-                new OperacionDTO(1, "PP", "Pagar Prestamo"),
-                new OperacionDTO(2, "VP", "Venta al Publico"),
-                new OperacionDTO(3, "VB", "Venta con Billete"),
-                new OperacionDTO(4, "CV", "Venta con Billete para Empeno"),
-                new OperacionDTO(5, "QE", "Liquidacion por Reempeno"),
-                new OperacionDTO(6, "DS", "Cobro Desempeño"),
-                new OperacionDTO(7, "RP", "Recepcion Pago Referenciado"),
-                new OperacionDTO(8, "RF", "Cobro Refrendo"),
-                new OperacionDTO(9, "CI", "Cobro Reimpresion Billete"),
-                new OperacionDTO(10, "RB", "Cobro Reposicion Billete"),
-                new OperacionDTO(11, "BA", "Cobro de Cargo Anticip,ado a Valuador"),
-                new OperacionDTO(12, "MP", "Marcar como Separ,ada"),
-                new OperacionDTO(13, "DC", "Caducar Demasia,"),
-                new OperacionDTO(14, "PD", "Pagar Demasia"),
-                new OperacionDTO(15, "GA", "Cobro Almacenaje"),
-                new OperacionDTO(16, "AD", "Acreditacion de D,esempeno Banco"),
-                new OperacionDTO(17, "AS", "Servicio Avaluo"),
-                new OperacionDTO(18, "AX", "Acreditacion de Dese,mpeno Cruzado"),
-                new OperacionDTO(19, "BS", "Baja por Siniestro"),
-                new OperacionDTO(20, "PI", "Pago de Indemnizacion")
-        );
     }
 
 }
