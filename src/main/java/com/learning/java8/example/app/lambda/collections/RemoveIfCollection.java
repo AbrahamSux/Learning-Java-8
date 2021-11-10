@@ -38,7 +38,7 @@ public class RemoveIfCollection {
 
     public void llenarLista() {
         listaOperaciones = new ArrayList<>();
-        listaOperaciones.addAll(Constants.listaOperaciones);
+        listaOperaciones.addAll(Constants.listOfOperations);
     }
 
     public List<OperacionDTO> usingRemoveIf(List<OperacionDTO> list) {
@@ -60,7 +60,7 @@ public class RemoveIfCollection {
                 listToRemoveTwo.remove(dto);
             }
         }
-        list = listToRemoveTwo;/
+        list = listToRemoveTwo;*/
 
 
         // Using Java 7: Option 3

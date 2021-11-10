@@ -43,7 +43,7 @@ public class ForEachCollection {
     }
 
     public void llenarLista() {
-        listaOperaciones = Constants.listaOperaciones;
+        listaOperaciones = Constants.listOfOperations;
     }
 
 

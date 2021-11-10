@@ -37,7 +37,7 @@ public final class Constants implements Serializable {
             ID_OP_CAJA_PAGO_COMPRA_PRIVADA
     );
 
-    public static List<OperacionDTO> listaOperaciones = Arrays.asList(
+    public static List<OperacionDTO> listOfOperations = Arrays.asList(
             new OperacionDTO(2, "VPU", "Venta Pública"),
             new OperacionDTO(3, "VPR", "Venta Privada"),
             new OperacionDTO(6, "CPU", "Compra Pública"),
