@@ -1,4 +1,4 @@
-package com.learning.java8.example.app.lambda.collections.utils;
+package com.learning.java8.example.app.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;

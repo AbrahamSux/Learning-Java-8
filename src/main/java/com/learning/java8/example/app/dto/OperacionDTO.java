@@ -1,4 +1,4 @@
-package com.learning.java8.example.app.lambda.collections.dto;
+package com.learning.java8.example.app.dto;
 
 public class OperacionDTO {
 

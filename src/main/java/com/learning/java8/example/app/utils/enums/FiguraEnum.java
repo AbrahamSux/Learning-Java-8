@@ -1,4 +1,4 @@
-package com.learning.java8.example.app.defaultmethods.enums;
+package com.learning.java8.example.app.utils.enums;
 
 public enum FiguraEnum {
 

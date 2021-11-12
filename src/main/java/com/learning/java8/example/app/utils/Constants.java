@@ -1,13 +1,13 @@
-package com.learning.java8.example.app.lambda.collections.utils;
+package com.learning.java8.example.app.utils;
 
-import com.learning.java8.example.app.lambda.collections.dto.OperacionDTO;
+import com.learning.java8.example.app.dto.OperacionDTO;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import static com.learning.java8.example.app.lambda.collections.utils.CollectionConvinience.asSet;
+import static com.learning.java8.example.app.utils.CollectionConvinience.asSet;
 
 
 public final class Constants implements Serializable {

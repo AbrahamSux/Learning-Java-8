@@ -1,6 +1,6 @@
 package com.learning.java8.example.app.defaultmethods;
 
-import com.learning.java8.example.app.defaultmethods.enums.FiguraEnum;
+import com.learning.java8.example.app.utils.enums.FiguraEnum;
 import com.learning.java8.example.app.defaultmethods.interfaces.Figura;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
