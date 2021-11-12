@@ -1,6 +1,6 @@
 package com.learning.java8.example.app.lambda.collections;
 
-import com.learning.java8.example.app.dto.OperacionDTO;
+import com.learning.java8.example.app.models.dto.OperacionDTO;
 import com.learning.java8.example.app.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

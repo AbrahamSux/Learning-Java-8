@@ -1,4 +1,4 @@
-package com.learning.java8.example.app.dto;
+package com.learning.java8.example.app.models.dto;
 
 public class OperacionDTO {
 

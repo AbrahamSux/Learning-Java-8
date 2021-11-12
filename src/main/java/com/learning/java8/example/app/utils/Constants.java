@@ -1,6 +1,6 @@
 package com.learning.java8.example.app.utils;
 
-import com.learning.java8.example.app.dto.OperacionDTO;
+import com.learning.java8.example.app.models.dto.OperacionDTO;
 
 import java.io.Serializable;
 import java.util.Arrays;
