@@ -1,13 +1,8 @@
 package com.learning.java8.example.app.optional;
 
-import com.learning.java8.example.app.models.dto.OperacionDTO;
-import com.learning.java8.example.app.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 
 public class OptionalApp {
@@ -45,20 +40,9 @@ public class OptionalApp {
         tester.usingIfPresent("Element String");
 
 
-        // Usando List<Optional<Object>>
-        LOGGER.info(">>> Usando List<Optional<Object>>... ");
-        List<Optional<OperacionDTO>> listOptional = tester.usingListOptional();
-        if (listOptional != null && !listOptional.isEmpty()) {
-            LOGGER.info("Lista de Elementos Opcionales : {}", listOptional);
-        }
-
-
-        // Usando Optional<List<OperacionDTO>>
-        LOGGER.info(">>> Usando Optional<List<OperacionDTO>>... ");
-        Optional<List<OperacionDTO>> optionalList = tester.usingOptionalList();
-        if (optionalList.isPresent()) {
-            LOGGER.info("Optional List : {}", optionalList);
-        }
+        // Diferencia entre OrElseGet y OrElse
+        LOGGER.info(">>> Usando 'OrElseGet' And 'OrElse' Differ... ");
+        tester.whenOrElseGetAndOrElseDiffer_thenCorrect();
     }
 
 
@@ -95,53 +79,34 @@ public class OptionalApp {
         LOGGER.info("Existe Elemento ? : {} : {}", optional.isPresent(), optional.orElse("NULL"));
     }
 
-    /**
-     * Ejemplo del uso de una Lista de Optional.
-     *
-     * @return List<Optional<OperacionDTO>>
-     */
-    public List<Optional<OperacionDTO>> usingListOptional() {
+    public void whenOrElseGetAndOrElseDiffer_thenCorrect() {
+        String text = "Text present";
 
-        List<OperacionDTO> listaOperaciones = new ArrayList<>(Constants.listOfOperations);
-        List<Optional<OperacionDTO>> optional = new ArrayList<>();
+        LOGGER.info("> Usando orElseGet :");
+        String defaultTextOne = Optional.ofNullable(text).orElseGet(this::obtenerCadena);
+        LOGGER.info("Text present : {}", defaultTextOne);
 
-        // Lista Normal
-        listaOperaciones.stream().sorted(Comparator.comparing(OperacionDTO::getId).reversed()).forEach( e -> {
-            // LOGGER.info("Elemento Normal : {}", e);
 
-            optional.add(Optional.of(e));
-        });
+        LOGGER.info("> Usando orElse :");
+        String defaultTextTwo = Optional.ofNullable(text).orElse(obtenerCadena());
+        LOGGER.info("Text present : {}", defaultTextTwo);
 
-        // Lista de Optional
-        if (!optional.isEmpty()) {
-            optional.forEach( e -> LOGGER.info("Element Optional : {}", e));
-        }
-
-        return optional;
+        /**
+         * Tenga en cuenta que cuando se usa orElseGet() para recuperar el valor envuelto, el método getMyDefault()
+         * ni siquiera se invoca ya que el valor contenido está presente.
+         *
+         * Sin embargo, cuando se usa orElse(), ya sea que el valor envuelto esté presente o no, se crea el objeto
+         * predeterminado. Entonces, en este caso, acabamos de crear un objeto redundante que nunca se usa.
+         *
+         * En este ejemplo simple, no hay un costo significativo para crear un objeto predeterminado, ya que la JVM
+         * sabe cómo manejarlo. Sin embargo, cuando un método como getMyDefault() tiene que realizar una llamada a un
+         * servicio web o incluso consultar una base de datos, el costo se vuelve muy obvio.
+         */
     }
 
-    /**
-     * Ejemplo del uso de un Optional con una Lista.
-     *
-     * @return Optional<List<OperacionDTO>>
-     */
-    public Optional<List<OperacionDTO>> usingOptionalList() {
-
-        List<OperacionDTO> listaOperaciones = new ArrayList<>(Constants.listOfOperations);
-        Optional<List<OperacionDTO>> optionalList = Optional.empty();
-
-        // Lista Normal
-        listaOperaciones.stream().sorted(Comparator.comparing(OperacionDTO::getId).reversed()).forEach( e -> {
-            LOGGER.info("Elemento Normal : {}", e);
-        });
-
-        optionalList = Optional.of(listaOperaciones);
-
-        optionalList.ifPresent(lista -> lista.forEach( e ->
-                LOGGER.info("Element Optional : {}", e)
-        ));
-
-        return optionalList;
+    public String obtenerCadena() {
+        LOGGER.debug("Getting Default Value");
+        return "Default Value";
     }
 
 }
