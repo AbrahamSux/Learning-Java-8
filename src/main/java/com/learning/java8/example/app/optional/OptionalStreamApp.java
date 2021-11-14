@@ -1,14 +1,17 @@
 package com.learning.java8.example.app.optional;
 
 import com.learning.java8.example.app.models.dto.OperacionDTO;
+import com.learning.java8.example.app.models.entity.Person;
 import com.learning.java8.example.app.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class OptionalStreamApp {
 
@@ -40,6 +43,20 @@ public class OptionalStreamApp {
 
         LOGGER.info(">>> Usando List<Optional<Object>> & Filter...");
         tester.usingListOptionalFilter();
+
+
+        LOGGER.info(">>> Misuse of Optionals...");
+        List<Person> personList = Arrays.asList(
+                new Person("Jorge", 42, "12345"),
+                new Person("José", 39, "12345"),
+                new Person("Arturo", 37, "12345"),
+                new Person("Jorge", 38, "12345"),
+                new Person("Ricardo", 38, "12345")
+        );
+        //List<Person> persons = tester.doSearch(personList, "Jorge", null);
+        List<Person> persons = tester.search(personList, "Jorge");
+        //List<Person> persons = tester.search(personList, "Jorge", 35);
+        LOGGER.info("Lista de usuarios con nombre Jorge : {}", persons);
     }
 
 
@@ -129,4 +146,43 @@ public class OptionalStreamApp {
 
         return optional;
     }
+
+
+
+    /**
+     * El uso indebido de Opcionals
+     */
+    public List<Person> search(List<Person> people, String name) {
+        return doSearch(people, name, Optional.empty());
+    }
+
+    public List<Person> search(List<Person> people, String name, int age) {
+        return doSearch(people, name, Optional.of(age));
+    }
+
+    public List<Person> doSearch(List<Person> people, String name, Optional<Integer> age) {
+        LOGGER.info(">> doSearch ( list, {}, {} )", name, age);
+
+        // Opción 1 : Validación de 'age' en caso de ser Nulo o Vacío.
+        final Integer ageFilter = Optional.ofNullable(age).isPresent() ? age.orElse(0) : 0;
+
+        // Opción 2
+        /*final Integer ageFilter = Stream.<Supplier<Optional<Integer>>>of(() -> age)
+                .map(Supplier::get)
+                .filter(Objects::nonNull)
+                .map(Optional::get)
+                .findFirst()
+                .orElse(0);*/
+
+        LOGGER.info("Edad : {}", ageFilter);
+
+
+        // Null checks for people and name
+        return people.stream()
+                .filter(p -> p.getName().isPresent() && p.getAge().isPresent())
+                .filter(p -> p.getName().get().equals(name))
+                .filter(p -> p.getAge().get() >= ageFilter)
+                .collect(Collectors.toList());
+    }
+
 }
