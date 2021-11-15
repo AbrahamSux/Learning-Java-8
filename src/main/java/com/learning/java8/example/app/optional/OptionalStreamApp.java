@@ -150,7 +150,9 @@ public class OptionalStreamApp {
 
 
     /**
-     * El uso indebido de Opcionals
+     * El uso indebido de Opcionals.
+     *
+     * Opcional está destinado a usarse como un tipo de retorno. No se recomienda intentar usarlo como un tipo de campo.
      */
     public List<Person> search(List<Person> people, String name) {
         return doSearch(people, name, Optional.empty());
@@ -160,7 +162,7 @@ public class OptionalStreamApp {
         return doSearch(people, name, Optional.of(age));
     }
 
-    public List<Person> doSearch(List<Person> people, String name, Optional<Integer> age) {
+    public List<Person> doSearch(List<Person> people, String name, Optional<Integer> age) { // Optional: No recomendado usarlo como parámetro.
         LOGGER.info(">> doSearch ( list, {}, {} )", name, age);
 
         // Opción 1 : Validación de 'age' en caso de ser Nulo o Vacío.
